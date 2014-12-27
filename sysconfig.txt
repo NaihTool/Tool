@@ -1,0 +1,7 @@
+USERNAME:
+PASSWORD:
+DLLPATH:
+SOFTID:
+SOFTKEY:
+DLLVerifyKey:
+CheckStatus:
