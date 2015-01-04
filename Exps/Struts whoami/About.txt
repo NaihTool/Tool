@@ -1,0 +1,2 @@
+Struts  whomai
+执行完，请点击Show 查看HTTP内容

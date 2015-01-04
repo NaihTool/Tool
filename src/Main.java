@@ -433,68 +433,72 @@ public class Main
 																										
 																										
 																										///////////
-																										String requestData="";
-																										for (String temp2 = brIn.readLine(); temp2 != null; temp2 = brIn.readLine()) //循环获取浏览器传过来的数据   （缓冲期里）
+																										if(endString.length()>0)
 																										{
-																											//System.out.println(temp2);
-																											requestData = requestData+temp2+"\r\n";
-																											if(temp2.equals(endString))
+																											String requestData="";
+																											for (String temp2 = brIn.readLine(); temp2 != null; temp2 = brIn.readLine()) //循环获取浏览器传过来的数据   （缓冲期里）
 																											{
-																												break;
+																												//System.out.println(temp2);
+																												requestData = requestData+temp2+"\r\n";
+																												if(temp2.equals(endString))
+																												{
+																													break;
+																												}
 																											}
+																											
+																											StrBuffer = StrBuffer + "\r\n";
+																											StrBuffer = StrBuffer + requestData; //byte 转成字符串
+																											StrBuffer = StrBuffer + "\r\n"+"\r\n";
 																										}
-																										
-																										StrBuffer = StrBuffer + "\r\n";
-																										StrBuffer = StrBuffer + requestData; //byte 转成字符串
-																										StrBuffer = StrBuffer + "\r\n"+"\r\n";
-																										
-																										//System.exit(1);
-																										///////////
-																										/*
-																										int k=0;
-																										for (int i = 0; i < dataLength; i++) //循环读取 content-length 长度额字节
+																										else
 																										{
-																											
-																											byte tmp = (byte)brIn.read();
-																											tmpbytes.add(tmp); //加入 list 
-																											System.out.println(tmp);
-																											
-																											if(endString.length()>0) //这里很关键  ，如果是表单上传  content-length 来判断 字符串结束符是不准确的  因为如果上传 图片或者什么二进制 容易造成字节数的不正确  ， 通过content-length 来判断会造成 socket 一直在等待   因此
-																												//通过读取的字节与上传表单格式的结束字符串进行匹配 来判断 数据流的读取结束 
+																											int k=0;
+																											for (int i = 0; i < dataLength; i++) //循环读取 content-length 长度额字节
 																											{
 																												
-																												if(endString.substring(k, k+1).equals(String.valueOf(((char)tmp)))) //如果一个字符 与 endString匹配 则 k+1 标志成功匹配多了一个 ，如果不匹配则 设置k=0
-																													//这样只有当 连续匹配 endString.length 长度的时候 即 k=endString.length  说明结束
+																												byte tmp = (byte)brIn.read();
+																												tmpbytes.add(tmp); //加入 list 
+																												System.out.println(tmp);
+																												
+																												if(endString.length()>0) //这里很关键  ，如果是表单上传  content-length 来判断 字符串结束符是不准确的  因为如果上传 图片或者什么二进制 容易造成字节数的不正确  ， 通过content-length 来判断会造成 socket 一直在等待   因此
+																													//通过读取的字节与上传表单格式的结束字符串进行匹配 来判断 数据流的读取结束 
 																												{
-																													k++;
 																													
-																													if(k==endString.length())
+																													if(endString.substring(k, k+1).equals(String.valueOf(((char)tmp)))) //如果一个字符 与 endString匹配 则 k+1 标志成功匹配多了一个 ，如果不匹配则 设置k=0
+																														//这样只有当 连续匹配 endString.length 长度的时候 即 k=endString.length  说明结束
 																													{
+																														k++;
 																														
-																														break;
+																														if(k==endString.length())
+																														{
+																															
+																															break;
+																														}
+																													}
+																													else
+																													{
+																														k=0;
 																													}
 																												}
-																												else
-																												{
-																													k=0;
-																												}
+																												
 																											}
 																											
+																											
+																											// 把 list 的byte 转成  数组的byte 
+																											int listcount = tmpbytes.size();
+																											byte[] tmtmp = new byte[listcount];
+																											for(int i=0;i<listcount;i++)
+																											{
+																												tmtmp[i] = tmpbytes.get(i);
+																											}
+																											
+																											StrBuffer = StrBuffer + "\r\n";
+																											StrBuffer = StrBuffer + Method.bytesToString(tmtmp); //byte 转成字符串
+																											StrBuffer = StrBuffer + "\r\n"+"\r\n";
 																										}
 																										
 																										
-																										// 把 list 的byte 转成  数组的byte 
-																										int listcount = tmpbytes.size();
-																										byte[] tmtmp = new byte[listcount];
-																										for(int i=0;i<listcount;i++)
-																										{
-																											tmtmp[i] = tmpbytes.get(i);
-																										}
 																										
-																										StrBuffer = StrBuffer + "\r\n";
-																										StrBuffer = StrBuffer + Method.bytesToString(tmtmp); //byte 转成字符串
-																										StrBuffer = StrBuffer + "\r\n"+"\r\n";
-																										*/
 																										
 																										
 																										
@@ -641,67 +645,68 @@ public class Main
 																										
 																										
 																										///////////
-																										String requestData="";
-																										for (String temp2 = brIn.readLine(); temp2 != null; temp2 = brIn.readLine()) //循环获取浏览器传过来的数据   （缓冲期里）
+																										if(endString.length()>0)
 																										{
-																											//System.out.println(temp2);
-																											requestData = requestData+temp2+"\r\n";
-																											if(temp2.equals(endString))
+																											String requestData="";
+																											for (String temp2 = brIn.readLine(); temp2 != null; temp2 = brIn.readLine()) //循环获取浏览器传过来的数据   （缓冲期里）
 																											{
-																												break;
-																											}
-																										}
-																										
-																										StrBuffer = StrBuffer + "\r\n";
-																										StrBuffer = StrBuffer + requestData; //byte 转成字符串
-																										StrBuffer = StrBuffer + "\r\n"+"\r\n";
-																										
-																										
-																										/*
-																										
-																										
-																										
-																										
-																										int k=0;
-																										List<Byte> tmpbytes = new ArrayList<Byte>();
-																										for (int i = 0; i < dataLength; i++)
-																										{
-																											byte tmp = (byte)brIn.read();
-																											tmpbytes.add(tmp);
-																											if(tmp==-1)
-																											{
-																												break;
+																												//System.out.println(temp2);
+																												requestData = requestData+temp2+"\r\n";
+																												if(temp2.equals(endString))
+																												{
+																													break;
+																												}
 																											}
 																											
-																											if(endString.length()>0)
+																											StrBuffer = StrBuffer + "\r\n";
+																											StrBuffer = StrBuffer + requestData; //byte 转成字符串
+																											StrBuffer = StrBuffer + "\r\n"+"\r\n";
+																										}
+																										else
+																										{
+																											int k=0;
+																											List<Byte> tmpbytes = new ArrayList<Byte>();
+																											for (int i = 0; i < dataLength; i++)
 																											{
-																												if(endString.substring(k, k+1).equals(String.valueOf(((char)tmp))))
+																												byte tmp = (byte)brIn.read();
+																												tmpbytes.add(tmp);
+																												if(tmp==-1)
 																												{
-																													k++;
-																													
-																													if(k==endString.length())
+																													break;
+																												}
+																												
+																												if(endString.length()>0)
+																												{
+																													if(endString.substring(k, k+1).equals(String.valueOf(((char)tmp))))
 																													{
+																														k++;
 																														
-																														break;
+																														if(k==endString.length())
+																														{
+																															
+																															break;
+																														}
+																													}
+																													else
+																													{
+																														k=0;
 																													}
 																												}
-																												else
-																												{
-																													k=0;
-																												}
 																											}
-																										}
 
-																										int listcount = tmpbytes.size();
-																										byte[] tmtmp = new byte[listcount];
-																										for(int i=0;i<listcount;i++)
-																										{
-																											tmtmp[i] = tmpbytes.get(i);
+																											int listcount = tmpbytes.size();
+																											byte[] tmtmp = new byte[listcount];
+																											for(int i=0;i<listcount;i++)
+																											{
+																												tmtmp[i] = tmpbytes.get(i);
+																											}
+																											StrBuffer = StrBuffer + "\r\n";
+																											StrBuffer = StrBuffer + Method.bytesToString(tmtmp);
+																											StrBuffer = StrBuffer + "\r\n"+"\r\n";
 																										}
-																										StrBuffer = StrBuffer + "\r\n";
-																										StrBuffer = StrBuffer + Method.bytesToString(tmtmp);
-																										StrBuffer = StrBuffer + "\r\n"+"\r\n";
-																										*/
+																										
+																										
+																										
 																										break;
 																									}
 																								}
@@ -2319,6 +2324,7 @@ public class Main
 																				host = targetHost;
 																				port = targetPort;
 																				requestData = Method.replaceHostPort(requestData,host,port);
+																				requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																			}
 																			else
 																			{
@@ -2911,6 +2917,7 @@ public class Main
 																					host = targetHost;
 																					port = targetPort;
 																					requestData = Method.replaceHostPort(requestData,host,port);
+																					requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																				}
 																				else
 																				{
@@ -3464,6 +3471,7 @@ public class Main
 																						host = targetHost;
 																						port = targetPort;
 																						requestData = Method.replaceHostPort(requestData,host,port);
+																						requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																					}
 																					else
 																					{
@@ -4008,6 +4016,7 @@ public class Main
 																	host = targetHost;
 																	port = targetPort;
 																	requestData = Method.replaceHostPort(requestData,host,port);
+																	requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																}
 																else
 																{
@@ -4636,6 +4645,7 @@ public class Main
 																			host = targetHost;
 																			port = targetPort;
 																			requestData = Method.replaceHostPort(requestData,host,port);
+																			requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																		}
 																		else
 																		{
@@ -5181,6 +5191,7 @@ public class Main
 																				host = targetHost;
 																				port = targetPort;
 																				requestData = Method.replaceHostPort(requestData,host,port);
+																				requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																			}
 																			else
 																			{
@@ -5732,6 +5743,7 @@ public class Main
 																					host = targetHost;
 																					port = targetPort;
 																					requestData = Method.replaceHostPort(requestData,host,port);
+																					requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																				}
 																				else
 																				{
@@ -6262,6 +6274,7 @@ public class Main
 																host = targetHost;
 																port = targetPort;
 																requestData = Method.replaceHostPort(requestData,host,port);
+																requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 															}
 															else
 															{
@@ -9635,6 +9648,7 @@ public class Main
 																				host = targetHost;
 																				port = targetPort;
 																				requestData = Method.replaceHostPort(requestData,host,port);
+																				requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																			}
 																			else
 																			{
@@ -10230,6 +10244,7 @@ public class Main
 																					host = targetHost;
 																					port = targetPort;
 																					requestData = Method.replaceHostPort(requestData,host,port);
+																					requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																				}
 																				else
 																				{
@@ -10783,6 +10798,7 @@ public class Main
 																						host = targetHost;
 																						port = targetPort;
 																						requestData = Method.replaceHostPort(requestData,host,port);
+																						requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																					}
 																					else
 																					{
@@ -11327,6 +11343,7 @@ public class Main
 																	host = targetHost;
 																	port = targetPort;
 																	requestData = Method.replaceHostPort(requestData,host,port);
+																	requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																}
 																else
 																{
@@ -11955,6 +11972,7 @@ public class Main
 																			host = targetHost;
 																			port = targetPort;
 																			requestData = Method.replaceHostPort(requestData,host,port);
+																			requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																		}
 																		else
 																		{
@@ -12500,6 +12518,7 @@ public class Main
 																				host = targetHost;
 																				port = targetPort;
 																				requestData = Method.replaceHostPort(requestData,host,port);
+																				requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																			}
 																			else
 																			{
@@ -13051,6 +13070,7 @@ public class Main
 																					host = targetHost;
 																					port = targetPort;
 																					requestData = Method.replaceHostPort(requestData,host,port);
+																					requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 																				}
 																				else
 																				{
@@ -13581,6 +13601,7 @@ public class Main
 																host = targetHost;
 																port = targetPort;
 																requestData = Method.replaceHostPort(requestData,host,port);
+																requestData = Method.replaceHostFromReferer(requestData,host+previousURL);
 															}
 															else
 															{

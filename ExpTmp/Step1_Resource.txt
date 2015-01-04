@@ -1,0 +1,16 @@
+POST http://192.168.44.129/drupal-7.31/?q=8.44.129/drupal-7.31&destination=8.44.129/drupal-7.31 HTTP/1.1
+Host: 192.168.44.129
+Proxy-Connection: keep-alive
+Content-Length: 123
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Origin: http://192.168.44.129
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Referer: http://192.168.44.129/drupal-7.31/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: Drupal.toolbar.collapsed=0; has_js=1
+
+name=NaihTest&pass=testss&form_build_id=form-P-klhRunxq54A0h2k4KBoQb4j2DbQMl0JbFGkJqPEvw&form_id=user_login_block&op=Log+in
+

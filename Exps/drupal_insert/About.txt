@@ -1,0 +1,4 @@
+drupal-7.31 注入，
+无视表前缀，增加一个用户
+user: NaihTest
+pass: testss

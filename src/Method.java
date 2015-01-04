@@ -19,6 +19,8 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -1207,9 +1209,53 @@ public class Method {
 	public static String addPreviousURL(String request,String previousURL)
 	{
 		String[] tmp = request.split("\r\n");
-		
+		previousURL = previousURL.replaceAll("/+", "/");
+		previousURL = previousURL.replaceAll("/+$", "");
 		String headerFirstLine = tmp[0];
+		
+		
+		
+		//System.exit(1);
 		String[] headerFirstLines = headerFirstLine.split(" ");
+		
+		Pattern r = Pattern.compile("\\$(.{1,9})\\$");
+
+	      // 现在创建 matcher 对象
+	    Matcher m = r.matcher(headerFirstLines[1]);
+	    if(m.find())
+	    {
+	    	System.out.println(m.group(1));
+	    	try
+	    	{
+	    		int i = Integer.valueOf(m.group(1));
+	    		headerFirstLines[1] = headerFirstLines[1].replaceAll("\\$.{1,9}\\$","");
+	    		if(i>0)
+	    		{
+	    			String[] previousURLs = previousURL.split("/");
+	    			if(previousURLs.length>i)
+	    			{
+	    				
+	    				String previousStr = "";
+	    				for(int j=0;j<previousURLs.length-i;j++)
+	    				{
+	    				
+	    					previousStr = previousStr +previousURLs[j]+"/";
+	    				}
+	    				previousURL = previousStr;
+	    			}
+	    			
+	    		}
+	    		
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		e.printStackTrace();
+	    	}
+	    
+	    }
+	    
+
+		
 		headerFirstLines[1] = "/"+previousURL+headerFirstLines[1];
 		tmp[0] = headerFirstLines[0]+" "+headerFirstLines[1]+" "+headerFirstLines[2];
 		
@@ -1299,6 +1345,21 @@ public class Method {
 		tmp = tmp.replaceAll("\r\r\n", "\r\n");
 		//tmp = tmp.replaceAll("\r\n\n", "\r\n");
 		return tmp;
+	}
+	
+	
+	
+	public static String replaceHostFromReferer(String requestData,String host)
+	{
+		requestData = requestData.replaceAll("\\$host\\$", host);
+		return requestData;
+	}
+	
+	
+	public static void main(String[] args)
+	{
+		String tmp = "1231231232354657687$host$444444444444444444";
+		System.out.println(replaceHostFromReferer(tmp,"TTT"));
 	}
 	
 	

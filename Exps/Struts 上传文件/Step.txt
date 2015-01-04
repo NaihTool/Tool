@@ -1,0 +1,2 @@
+Step0.txt-host:MTI3LjAuMC4x-port:ODA4MA==-stepName:U3RlcDAudHh0-replaceHostPort:true-useSetCookieFromPrevious:true-randomString:-captcha:-setParamsFromDataPackage:-setGoAheadOrStopFromStatus:-setGoAheadOrStopFromData:-useFileForCycleWithPackage:-fileForCycleWithEXP:
+Step1.txt-host:MTI3LjAuMC4x-port:ODA4MA==-stepName:U3RlcDEudHh0-replaceHostPort:true-useSetCookieFromPrevious:true-randomString:-captcha:-setParamsFromDataPackage:-setGoAheadOrStopFromStatus:MjAwLFN0b3AgRVhQ,-setGoAheadOrStopFromData:-useFileForCycleWithPackage:-fileForCycleWithEXP:
